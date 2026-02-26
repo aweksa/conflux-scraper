@@ -1,5 +1,5 @@
 import requests
-from .connfig import HEADERS
+from .config import HEADERS
 from typing import Optional
 
 def fetch_page(url : str, timeout: int = 15) -> Optional[str]:

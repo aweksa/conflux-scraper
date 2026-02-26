@@ -1,6 +1,6 @@
 from conflux.pagination import iterate_pages
 
-SITE_URL = "https://conflux.rx/Board-Games"
+SITE_URL = "https://conflux.rs/Board-Games"
 
 def main():
     for page_num, html in iterate_pages(SITE_URL):
@@ -9,10 +9,5 @@ def main():
 if __name__ == "__main__":
     main()
 
-
-
-    
-
-    
 
         

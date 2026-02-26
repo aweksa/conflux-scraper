@@ -8,7 +8,7 @@ def page_has_product(html: str) -> bool:
     soup = BeautifulSoup(html, "lxml")
     return bool(soup.select(".product-layout"))
 
-def iterate_pages(url : str, delay : float = 0.5) -> Iterator[Tuple[int, str]]:
+def iterate_pages(url : str, delay : float = 0.01) -> Iterator[Tuple[int, str]]:
     page = 1
     while True:
         url = build_page_url(url, page)
