@@ -4,7 +4,9 @@ from datetime import datetime
 DB_PATH = "data/price_tracker.db"
 
 def connect():
-    return sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH)
+    conn.execute("PRAGMA foreign_keys = ON")
+    return conn
 
 def initialize_db():
     conn = connect()
@@ -13,7 +15,7 @@ def initialize_db():
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS products (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        product_id TEXT UNIQUE,
+        product_id INTEGER UNIQUE,
         title TEXT,
         link TEXT
     )
@@ -22,7 +24,7 @@ def initialize_db():
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS price_history (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        product_id TEXT,
+        product_id INTEGER,
         price INTEGER,
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY(product_id) REFERENCES products(product_id)
@@ -31,7 +33,7 @@ def initialize_db():
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS stock_history (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        product_id TEXT,
+        product_id INTEGER,
         status TEXT,
         quantity INTEGER,
         arrival_date DATE,
